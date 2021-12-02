@@ -36,6 +36,7 @@ namespace Photon.Pun
         GameObject targetObj;
         GameObject obj;
         GameObject[] Sobj;
+        public GameObject Speaker;
         float ObjY = 1.0f; //スピーカー高さ
 
         public enum ParameterType
@@ -132,27 +133,15 @@ namespace Photon.Pun
         {
             this.m_Animator = GetComponent<Animator>();
             var videoPlayer = GetComponent<VideoPlayer>();
-            var firstgameObject = GameObject.Find("Speaker0");
+            var firstgameObject = GameObject.Find("Capsule");
+            audioSource = firstgameObject.GetComponent<AudioSource>();
             //(((PhotonNetwork.CurrentRoom.PlayerCount/8)+1)*8) - 1)
             //1列：7 8
             //2列：15 16
 
-            if (firstgameObject == null)
-            {
-                Generationspeaker();
-            }
-        }
-
-        public void Generationspeaker()
-        {
-            //プレーヤーが増えたときにスピーカーを増やす
-            // 列 × 出現させるスピーカー数(8個)
-            Sobj = new GameObject[1];
-            obj = (GameObject)Resources.Load("Speaker");
-
-            //スピーカー生成
-            Sobj[0] = Instantiate(obj, new Vector3(-5.0f, ObjY, 0.0f), Quaternion.identity);
-            Sobj[0].name = "Speaker0";
+            //Change scale
+            Speaker = GameObject.Find("Capsule");
+            Speaker.GetComponent<scale>().Scale();
         }
 
         [PunRPC]
@@ -163,7 +152,6 @@ namespace Photon.Pun
                 //スピーカー再生
                 GameObject PanelPlayer = GameObject.Find("panel");
                 var videoPlayer = PanelPlayer.GetComponent<VideoPlayer>();
-                var audioSource = Sobj[0].GetComponent<AudioSource>();
                 audioSource.time = 0f;
                 audioSource.Play();
 
