@@ -8,24 +8,20 @@ using Photon.Realtime;
 public class Mark : MonoBehaviourPunCallbacks
 {
     private bool _isMark = false;
-    public GameObject mark;
-    public GameObject mark1;
-    public GameObject mark2;
     public GameObject PhotonController;
     public RandomMatchMaker script;
-    [SerializeField] private AudioSource a;
-    [SerializeField] public AudioClip a1;
+    AudioSource audioSource;
+    private Animator anim; // キャラにアタッチされるアニメーターへの参照
 
     // Start is called before the first frame update
     void Start()
     {
-        // int myId = photonView.ViewID;
-        // Debug.Log(myId);
         PhotonController = GameObject.Find("PhotonController");
         script = PhotonController.GetComponent<RandomMatchMaker>();
+        audioSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>(); // Animatorコンポーネントを取得する
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Mark"))
@@ -33,6 +29,7 @@ public class Mark : MonoBehaviourPunCallbacks
             if (photonView.IsMine)
             {
                 photonView.RPC("ChangeMark", RpcTarget.All);
+                anim.SetBool("Rest", true);
             }
         }
 
@@ -48,16 +45,10 @@ public class Mark : MonoBehaviourPunCallbacks
     [PunRPC]
     private void ChangeMark()
     {
-        mark.SetActive(true);
-        mark1.SetActive(true);
-        mark2.SetActive(true);
         _isMark = true;
         StartCoroutine("Blink");
-        Logger logger = new Logger(System.DateTime.Now.Year.ToString() + "-" + System.DateTime.Now.Month.ToString() + "-" + System.DateTime.Now.Day.ToString() + "-" + System.DateTime.Now.Hour.ToString() + "-" + System.DateTime.Now.Minute.ToString() + "-" + System.DateTime.Now.Second.ToString() + "-" + System.DateTime.Now.Millisecond.ToString() + "-MarkLog-No" + PhotonNetwork.CurrentRoom.PlayerCount + ".txt");
-
-        logger.Log(" : UserID=" + PhotonNetwork.CurrentRoom.PlayerCount + " 1ボタンを押した");
-        logger.Close();
-        a.PlayOneShot(a1);
+        FileLog.AppendLog("log/log.txt", System.DateTime.Now.ToString() + " UserID=" + PhotonNetwork.CurrentRoom.PlayerCount + " Reaction\n");
+        audioSource.Play();
     }
 
     IEnumerator Blink()
@@ -65,9 +56,6 @@ public class Mark : MonoBehaviourPunCallbacks
         if (_isMark)
         {
             yield return new WaitForSeconds(2.0f); //2秒待って
-            mark.SetActive(false);
-            mark1.SetActive(false);
-            mark2.SetActive(false);
         }
     }
 }
