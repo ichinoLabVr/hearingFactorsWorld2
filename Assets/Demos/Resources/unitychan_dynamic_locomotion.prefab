@@ -1430,7 +1430,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animSpeed: 1.5
-  lookSmoother: 3
   useCurves: 1
   useCurvesHeight: 0.5
   forwardSpeed: 5
@@ -1438,7 +1437,6 @@ MonoBehaviour:
   fallSpeed: 7
   backwardSpeed: 2
   rotateSpeed: 2
-  jumpPower: 2
 --- !u!114 &4644543400838558705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1572,7 +1570,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4644543400831452845}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8328dc8574651514e98703cd9f913bdd, type: 3}
   m_Name: 
@@ -1590,13 +1588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd57acff5c79b94f903060340fe3b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mark: {fileID: 1279617021459379432}
-  mark1: {fileID: 3795934892085620167}
-  mark2: {fileID: 1399565574530193585}
   PhotonController: {fileID: 0}
   script: {fileID: 0}
-  a: {fileID: -972588873881134272}
-  a1: {fileID: 8300000, guid: d8c00923eb907a44ab941cf90c80e1fc, type: 3}
 --- !u!114 &5583817315793230224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9392,7 +9385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67381f139d56ce841b2948a6428c6fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionStep: 2
   _mouseSensitive: 90
 --- !u!20 &5441612368456909743
 Camera:
