@@ -32,6 +32,13 @@ namespace Photon.Pun
     {
         #region Enums
         VideoPlayer videoPlayer;
+        GameObject Panel;
+        GameObject Cube;
+        GameObject Cube2;
+
+        AudioSource panelaudioSource;
+        AudioSource cubeaudioSource;
+        AudioSource cube2audioSource;
         AudioSource audioSource;
         GameObject targetObj;
         GameObject obj;
@@ -132,16 +139,15 @@ namespace Photon.Pun
         private void Awake()
         {
             this.m_Animator = GetComponent<Animator>();
-            var videoPlayer = GetComponent<VideoPlayer>();
-            var firstgameObject = GameObject.Find("Capsule");
-            audioSource = firstgameObject.GetComponent<AudioSource>();
+            Panel = GameObject.Find("panel");
+            Cube = GameObject.Find("Cube");
+            Cube.GetComponent<scale>().Scale();
+            Cube2 = GameObject.Find("Cube2");
+            Cube2.GetComponent<scale>().Scale();
             //(((PhotonNetwork.CurrentRoom.PlayerCount/8)+1)*8) - 1)
             //1列：7 8
             //2列：15 16
 
-            //Change scale
-            Speaker = GameObject.Find("Capsule");
-            Speaker.GetComponent<scale>().Scale();
         }
 
         [PunRPC]
@@ -150,10 +156,18 @@ namespace Photon.Pun
             if (photonView.IsMine)
             {
                 //スピーカー再生
-                GameObject PanelPlayer = GameObject.Find("panel");
-                var videoPlayer = PanelPlayer.GetComponent<VideoPlayer>();
-                audioSource.time = 0f;
-                audioSource.Play();
+                var videoPlayer = Panel.GetComponent<VideoPlayer>();
+                var panelaudioSource = Panel.GetComponent<AudioSource>();
+                var cubeaudioSource = Cube.GetComponent<AudioSource>();
+                var cubeaudioSource2 = Cube2.GetComponent<AudioSource>();
+
+                cubeaudioSource.time = 0f;
+                cubeaudioSource.Play();
+                cubeaudioSource2.time = 0f;
+                cubeaudioSource2.Play();
+
+                panelaudioSource.time = 0f;
+                panelaudioSource.Play();
 
                 //動画再生
                 videoPlayer.time = 0f;
