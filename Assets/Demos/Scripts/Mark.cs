@@ -9,15 +9,13 @@ public class Mark : MonoBehaviourPunCallbacks
 {
     private bool _isMark = false;
     public GameObject PhotonController;
-    public RandomMatchMaker script;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     private Animator anim; // キャラにアタッチされるアニメーターへの参照
 
     // Start is called before the first frame update
     void Start()
     {
         PhotonController = GameObject.Find("PhotonController");
-        script = PhotonController.GetComponent<RandomMatchMaker>();
         audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>(); // Animatorコンポーネントを取得する
     }

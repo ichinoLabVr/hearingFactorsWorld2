@@ -13,6 +13,8 @@ TagManager:
   - BodyUp1
   - BodyUp2
   - BodyUp3
+  - onoffswitch
+  - noize
   layers:
   - Default
   - TransparentFX
