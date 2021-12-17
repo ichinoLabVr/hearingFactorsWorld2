@@ -23,13 +23,14 @@ public class NierSP : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        targets = GameObject.FindGameObjectsWithTag("Speaker");
         noisecube = transform.Find("NoiseCube").gameObject;
         tf = noisecube.GetComponent<Transform>();
         audioSource = noisecube.GetComponent<AudioSource>();
     }
     GameObject nier()
     {
+
+        targets = GameObject.FindGameObjectsWithTag("Speaker");
         float closeDist = 1000;
         foreach (GameObject t in targets)
         {

@@ -18,11 +18,19 @@ public class MuteTrigger : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-
+        if (!photonView.IsMine)
+        {
+            other.gameObject.tag = "SpeakerMute";
+            Debug.Log(other.gameObject.tag);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
+        if (!photonView.IsMine)
+        {
+            other.gameObject.tag = "Speaker";
+            Debug.Log(other.gameObject.tag);
+        }
     }
 }

@@ -334,7 +334,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4415528727056449344}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1758,9 +1758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8328dc8574651514e98703cd9f913bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
-  objName: 
-  muteList: []
 --- !u!114 &2193858684000377424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,6 +1771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhotonController: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &5583817315793230224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1897,7 +1895,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rb: {fileID: 4644543400826267009}
-  useList: []
 --- !u!1 &4644543400831452847
 GameObject:
   m_ObjectHideFlags: 0

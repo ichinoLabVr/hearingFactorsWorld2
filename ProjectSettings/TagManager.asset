@@ -15,6 +15,7 @@ TagManager:
   - BodyUp3
   - onoffswitch
   - noize
+  - SpeakerMute
   layers:
   - Default
   - TransparentFX
