@@ -33,9 +33,11 @@ namespace Photon.Pun
         #region Enums
         VideoPlayer videoPlayer;
         GameObject Panel;
+        GameObject noize;
 
         AudioSource panelaudioSource;
         AudioSource audioSource;
+        AudioSource noizeaudioSource;
 
         public enum ParameterType
         {
@@ -131,6 +133,7 @@ namespace Photon.Pun
         {
             this.m_Animator = GetComponent<Animator>();
             Panel = GameObject.Find("panel");
+            noize = GameObject.Find("NoiseCube");
             //(((PhotonNetwork.CurrentRoom.PlayerCount/8)+1)*8) - 1)
             //1列：7 8
             //2列：15 16
@@ -145,13 +148,20 @@ namespace Photon.Pun
                 //スピーカー再生
                 var videoPlayer = Panel.GetComponent<VideoPlayer>();
                 var panelaudioSource = Panel.GetComponent<AudioSource>();
+                var noizeaudioSource = noize.GetComponent<AudioSource>();
 
                 panelaudioSource.time = 0f;
                 panelaudioSource.Play();
 
+
+                noizeaudioSource.time = 0f;
+                noizeaudioSource.Play();
+
                 //動画再生
                 videoPlayer.time = 0f;
                 videoPlayer.Play();
+
+
             }
         }
 
