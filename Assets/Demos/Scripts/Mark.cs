@@ -8,14 +8,12 @@ using Photon.Realtime;
 public class Mark : MonoBehaviourPunCallbacks
 {
     private bool _isMark = false;
-    public GameObject PhotonController;
     public AudioSource audioSource;
     private Animator anim; // キャラにアタッチされるアニメーターへの参照
 
     // Start is called before the first frame update
     void Start()
     {
-        PhotonController = GameObject.Find("PhotonController");
         audioSource = GetComponent<AudioSource>();
         anim = GetComponent<Animator>(); // Animatorコンポーネントを取得する
     }
@@ -28,6 +26,17 @@ public class Mark : MonoBehaviourPunCallbacks
             {
                 photonView.RPC("ChangeMark", RpcTarget.All);
                 anim.SetBool("Rest", true);
+            }
+        }
+        if (Input.GetButtonDown("Master"))
+        {	// 9キーを入力したら
+            if (photonView.IsMine)
+            {
+                PhotonNetwork.SetMasterClient(photonView.Owner);
+                if (PhotonNetwork.LocalPlayer.IsMasterClient)
+                {
+                    Debug.Log("Master Clientになりました");
+                }
             }
         }
 
@@ -45,7 +54,7 @@ public class Mark : MonoBehaviourPunCallbacks
     {
         _isMark = true;
         StartCoroutine("Blink");
-        FileLog.AppendLog("log/log.txt", System.DateTime.Now.ToString() + " UserID=" + PhotonNetwork.CurrentRoom.PlayerCount + " Reaction\n");
+        FileLog.AppendLog("log/log.txt", System.DateTime.Now.ToString() + " UserID=" + photonView.OwnerActorNr + " Reaction\n");
         audioSource.Play();
     }
 

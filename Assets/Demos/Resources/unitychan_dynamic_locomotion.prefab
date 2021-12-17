@@ -1770,7 +1770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd57acff5c79b94f903060340fe3b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PhotonController: {fileID: 0}
   audioSource: {fileID: 0}
 --- !u!114 &5583817315793230224
 MonoBehaviour:
@@ -1895,6 +1894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rb: {fileID: 4644543400826267009}
+  span: 15
 --- !u!1 &4644543400831452847
 GameObject:
   m_ObjectHideFlags: 0
