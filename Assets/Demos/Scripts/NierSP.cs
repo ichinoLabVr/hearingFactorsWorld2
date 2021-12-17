@@ -15,9 +15,13 @@ public class NierSP : MonoBehaviourPunCallbacks
     GameObject nierobj;
     Transform unitychanpos;
     Transform targetpos;
+    Vector3 tarpos;
+    Vector3 unipos;
     GameObject noisecube;
     Transform tf;
     AudioSource audioSource;
+    public float span = 15f;
+    private float currentTime = 0f;
 
     private GameObject closeEnemy;
     // Start is called before the first frame update
@@ -48,23 +52,39 @@ public class NierSP : MonoBehaviourPunCallbacks
         }
         return closeEnemy;
     }
+    void Nierlog()
+    {
+        float pos = Mathf.Sqrt(Mathf.Pow(tarpos.x - unipos.x, 2f) + Mathf.Pow(tarpos.z - unipos.z, 2f));
+        FileLog.AppendLog("log/NierSP.txt", System.DateTime.Now.ToString() + nierobj.name + " UserID=" + photonView.OwnerActorNr + " : " + pos + "\n");
+        if (!photonView.IsMine)
+        {
+            Debug.Log(tarpos + "" + unipos);
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (!rb.IsSleeping() && photonView.IsMine)
+        if (!rb.IsSleeping())
         {
             nierobj = nier();
             unitychanpos = this.transform;
             targetpos = nierobj.transform;
-            Vector3 unipos = unitychanpos.position;
-            Vector3 tarpos = targetpos.position;
+            unipos = unitychanpos.position;
+            tarpos = targetpos.position;
 
             float x = (unipos.x * 2) - tarpos.x;
             float z = (unipos.z * 2) - tarpos.z;
             float volume = (Mathf.Sqrt(Mathf.Pow(tarpos.x - unipos.x, 2f) + Mathf.Pow(tarpos.z - unipos.z, 2f)) / 10) - 0.02f;
             noisecube.transform.position = new Vector3(x, 1, z);
             audioSource.volume = volume;
+        }
+
+        currentTime += Time.deltaTime;
+        if (currentTime > span)
+        {
+            currentTime = 0f;
+            Nierlog();
         }
     }
 }

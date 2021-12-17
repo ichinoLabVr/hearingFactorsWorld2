@@ -45,7 +45,7 @@ public class Mark : MonoBehaviourPunCallbacks
     {
         _isMark = true;
         StartCoroutine("Blink");
-        FileLog.AppendLog("log/log.txt", System.DateTime.Now.ToString() + " UserID=" + PhotonNetwork.CurrentRoom.PlayerCount + " Reaction\n");
+        FileLog.AppendLog("log/log.txt", System.DateTime.Now.ToString() + " UserID=" + photonView.OwnerActorNr + " Reaction\n");
         audioSource.Play();
     }
 
