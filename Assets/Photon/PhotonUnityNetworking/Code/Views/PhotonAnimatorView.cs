@@ -38,6 +38,7 @@ namespace Photon.Pun
         AudioSource panelaudioSource;
         AudioSource audioSource;
         AudioSource noizeaudioSource;
+        bool videoStart = false;
 
         public enum ParameterType
         {
@@ -146,9 +147,9 @@ namespace Photon.Pun
             if (photonView.IsMine)
             {
                 //スピーカー再生
-                var videoPlayer = Panel.GetComponent<VideoPlayer>();
-                var panelaudioSource = Panel.GetComponent<AudioSource>();
-                var noizeaudioSource = noize.GetComponent<AudioSource>();
+                videoPlayer = Panel.GetComponent<VideoPlayer>();
+                panelaudioSource = Panel.GetComponent<AudioSource>();
+                noizeaudioSource = noize.GetComponent<AudioSource>();
 
                 panelaudioSource.time = 0f;
                 panelaudioSource.Play();
@@ -160,6 +161,7 @@ namespace Photon.Pun
                 //動画再生
                 videoPlayer.time = 0f;
                 videoPlayer.Play();
+                videoStart = true;
 
 
             }
@@ -167,6 +169,15 @@ namespace Photon.Pun
 
         private void Update()
         {
+            if (videoStart)
+            {
+                if (videoPlayer.time > 129f)
+                {
+                    panelaudioSource.Stop();
+                    noizeaudioSource.Stop();
+                    PhotonNetwork.Disconnect();
+                }
+            }
             if (this.m_Animator.applyRootMotion && this.photonView.IsMine == false && PhotonNetwork.IsConnected == true)
             {
                 this.m_Animator.applyRootMotion = false;

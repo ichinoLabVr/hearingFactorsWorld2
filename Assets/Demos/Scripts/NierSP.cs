@@ -56,10 +56,6 @@ public class NierSP : MonoBehaviourPunCallbacks
     {
         float pos = Mathf.Sqrt(Mathf.Pow(tarpos.x - unipos.x, 2f) + Mathf.Pow(tarpos.z - unipos.z, 2f));
         FileLog.AppendLog("log/NierSP.txt", System.DateTime.Now.ToString() + " : " + nierobj.name + " UserID=" + photonView.OwnerActorNr + " : " + pos + "unitychan : " + unipos + "\n");
-        if (!photonView.IsMine)
-        {
-            Debug.Log(tarpos + "" + unipos);
-        }
     }
 
     // Update is called once per frame
